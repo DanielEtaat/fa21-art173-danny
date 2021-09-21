@@ -1,8 +1,8 @@
 // const backgroundColor = [230,220,190];
 const myCanvas = { width: 600, height: 600};
-const backgroundColor = [230,220,190];
+const backgroundColor = [130,120,190];
 const lineColor = [0, 0, 0];
-const activeLineColor = [190, 20, 110];
+const activeLineColor = [90, 20, 110];
 const lineWidth = 3;
 const activelineWidth = 9;
 const sounds = Array.from({ length: 6 });
@@ -12,42 +12,42 @@ const ball1 = {
     y: 300,
     size: 100,
     speed: 1,
-    fillColor: [190,80,230],
-    strokeColor: [0,220,20],
+    fillColor: [90,80,230],
+    strokeColor: [0,120,20],
     ballStrokeWeight: 2,
     rightSound: sounds[0],
     leftSound: sounds[1],
     soundLength: 2000,
     active: false,
-} 
+}
 
 const ball2 = {
     x: 300,
     y: 100,
     size: 50,
     speed: 2,
-    fillColor: [190,80,230],
-    strokeColor: [0,220,20],
+    fillColor: [90,80,230],
+    strokeColor: [0,120,20],
     ballStrokeWeight: 2,
     rightSound: sounds[2],
     leftSound: sounds[3],
     soundLength: 1000,
     active: false,
-} 
+}
 
 const ball3 = {
     x: 300,
     y: 200,
     size: 80,
     speed: 2,
-    fillColor: [190,80,230],
-    strokeColor: [0,220,20],
+    fillColor: [90,80,230],
+    strokeColor: [0,120,20],
     ballStrokeWeight: 2,
     rightSound: sounds[4],
     leftSound: sounds[5],
     soundLength: 500,
     active: false,
-} 
+}
 
 const leftEdge = {
     x1: 110,
@@ -101,7 +101,7 @@ function setup(){
 
 
 function draw(){
-    
+
     background(backgroundColor);
 
     balls.forEach((ball) => {
