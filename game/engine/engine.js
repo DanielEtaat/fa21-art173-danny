@@ -1,6 +1,11 @@
+const g = { "x": 0, "y": 2 }; // gravity
+const bk = 0.99; // air resistance
+const mk = 0.55 // friction
+
 class Entity {
-    constructor(x, y, animations) {
+    constructor(x, y, animations, width, height) {
         this.pos = { "x": x, "y": y };
+        this.shape = { "width": width, "height": height };
         this.animations = animations;
         this.currentAnimation = this.animations["init"];
     }
@@ -27,8 +32,71 @@ class Entity {
 }
 
 class Avatar extends Entity {
-    constructor(x, y, animations) {
-        super(x, y, animations);
+    constructor(x, y, animations, width, height) {
+        super(x, y, animations, width, height);
+        this.isOnGround = false;
+        this.net = { "x": 0, "y": 0 };
+        this.acc = { "x": 0, "y": 0 }
+    }
+
+    addForce(f) {
+        this.acc.x += f.x;
+        this.acc.y += f.y;
+    }  
+
+    moveRight(step) {
+        if (this.isOnGround) {
+            if (this.currentAnimation != this.animations["runRight"]) {
+                this.startAnimation("runRight");
+            }
+            this.addForce({"x": step, "y": 0});
+        }
+    }
+
+    moveLeft(step) {
+        if (this.isOnGround) {
+            if (this.currentAnimation != this.animations["runLeft"]) {
+                this.startAnimation("runLeft");
+            }
+            this.addForce({"x": -step, "y": 0});
+        }
+    }
+
+    moveUp(step) {
+        if (this.isOnGround) {
+            this.net.y = 0;
+            this.addForce({"x": 0, "y": -step});
+        }
+    }
+
+    moveDown(step) {
+
+    }
+
+    doNormForce(map) {
+        this.isOnGround = map.getFromPixels(this.pos.x, this.pos.y + this.shape.height + this.net.y) != 0;
+        if (this.isOnGround) {
+            this.addForce({ "x": -g.x, "y": -g.y });
+            this.pos.y -= (this.pos.y + this.shape.height + this.net.y) % Map.SQUARE_SIZE;
+            this.net.x *= mk;
+        }
+    }
+
+    updateInstance() {
+        this.net.x += this.acc.x;
+        this.net.y += this.acc.y
+        this.pos.x += this.net.x;
+        this.pos.y += this.net.y;
+        this.net.x *= bk;
+        this.net.y *= bk;
+        this.acc = { "x": 0, "y": 0 };
+    }
+
+    update(map) {
+        super.update(map);
+        this.doNormForce(map);
+        this.addForce(g);
+        this.updateInstance();
     }
 }
 

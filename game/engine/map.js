@@ -50,6 +50,7 @@ class Map {
                 image(Map.SQUARES[this.get(i, j)], squareX, squareY, Map.SQUARE_SIZE, Map.SQUARE_SIZE);
             }
         }
+
         os.x *= Map.SQUARE_SIZE;
         os.y *= Map.SQUARE_SIZE;
         return os;
