@@ -5,7 +5,11 @@ class Map {
 
     constructor(squareMap, w, h) {
         this.squareMap = squareMap;
-        this.dim = { "w": w, "h": h };
+        this.dim = { "w": w, "h": h, "pw": w * Map.SQUARE_SIZE, "ph": h * Map.SQUARE_SIZE };
+    }
+
+    static cannotPassThrough(sq) {
+        return sq == 1 || sq == 2;
     }
 
     get(x, y) {
@@ -16,6 +20,10 @@ class Map {
         x = Math.floor(x / Map.SQUARE_SIZE);
         y = Math.floor(y / Map.SQUARE_SIZE);
         return this.get(x, y);
+    }
+
+    replace(x, y, sq) {
+        this.squareMap[x + y * this.dim.w] = sq;
     }
 
     render(x, y, w, h) {
