@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="libs/p5.js"></script>
+    <script src="libs/p5.sound.js"></script>
+    <script src="index.js"></script>
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            background: black;
+        }
+
+        canvas {
+            border: 1px solid white;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            cursor: pointer;
+        }
+
+        p {
+            text-align: center;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .links {
+            color: white;
+            text-align: center;
+        }
+
+    </style>
+    <title>Fractals</title>
+</head>
+<body>
+    <p>Click to turn on the microphone.</p>
+    <div style="display: grid; grid-template-columns: 25% 50% 25%;">
+        <div class="links" style="grid-column: 1;">
+            <p>Play Something</p><br>
+            <div class="links">
+                <a href="https://www.youtube.com/watch?v=E8gmARGvPlI" target="_blank">Last Christmas</a><br><br>
+                <a href="https://www.youtube.com/watch?v=aAkMkVFwAoo" target="_blank">All I Want for Christmas Is You</a><br><br>
+                <a href="https://www.youtube.com/watch?v=gset79KMmt0" target="_blank">Snowman</a><br><br>
+                <a href="https://www.youtube.com/watch?v=QwVjTlTdIDQ" target="_blank">Piano Man</a><br><br>
+                <a href="https://www.youtube.com/watch?v=TZCfydWF48c" target="_blank">Four Seasons "Winter"</a><br><br>
+                <a href="https://www.youtube.com/watch?v=-tJYN-eG1zk" target="_blank">We Will Rock You</a><br><br>
+                <a href="https://www.youtube.com/watch?v=uX6uBHPGfSs" target="_blank">DNA</a><br><br>
+                <a href="https://www.youtube.com/watch?v=mQER0A0ej0M" target="_blank">Hey Jude</a><br><br>
+            </div>
+        </div>
+        <main style="grid-column: 2;"></main>
+        <div class="links" style="grid-column: 3;">
+
+        </div>
+    </div>
+</body>
+</html>
