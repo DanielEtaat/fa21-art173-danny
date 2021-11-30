@@ -58,6 +58,8 @@ let fs =
 
 let mic;
 let mandel;
+let spectrumOld;
+
 function setup() {
   let size = Math.min(windowWidth, windowHeight) / 1.25;
   createCanvas(size, size, WEBGL);
@@ -73,6 +75,7 @@ function setup() {
   noStroke();
 
   mic.start();
+  spectrumOld = fft.analyze();
 }
 
 let acc = 0.0;
@@ -81,16 +84,20 @@ function draw() {
   // 'r' is the size of the image in Mandelbrot-space
   let inp = 0.0;
   let spectrum = fft.analyze();
+  
   for (i = 0; i < spectrum.length; i++) {
-    inp += spectrum[i];
+    inp += Math.sqrt(Math.abs(spectrum[i] - spectrumOld[i]));
   }
-  inp = inp * 2 * (mic.getLevel() + 0.1) / (255 * spectrum.length);
+  spectrumOld = spectrum;
+  console.log(inp);
+
+  inp = inp * mic.getLevel() / (spectrum.length);
 
   if (inp < 0.001) {
       inp = 0.0;
   }
 
-  acc *= 0.8;
+  acc *= 0.9;
   acc += inp;
 
   mandel.setUniform('r', acc * Math.PI + 2.5 + sin(millis() / 50000));
