@@ -12,7 +12,8 @@ let fs =
   varying +
   'uniform float r;' +
   'uniform float time;' +
-  'const float NUM_ITERATIONS = 256.0;' +
+  'uniform float param;' +
+  'const float NUM_ITERATIONS = 512.0;' +
   'const float width = 1.6;' +
   'vec2 focus = vec2(0.0, 0.0);' + 
   'vec2 center = vec2(0.0, 0.0);' +
@@ -48,7 +49,7 @@ let fs =
   '}' +
 
   'void main() {' +
-  '  focus = 0.7885 * exp_i(r);' +
+  '  focus = param * exp_i(r);' +
   '  vec2 c = transformCoord(vPos);' +
   '  float i = iter(c);' +
   '  vec3 colh = vec3(time / 10.0, 1.0, 0.5 - 0.5*cos(time / 5.0));' +
@@ -59,9 +60,10 @@ let fs =
 let mic;
 let mandel;
 let spectrumOld;
+let slider;
 
 function setup() {
-  let size = Math.min(windowWidth, windowHeight) / 1.25;
+  let size = Math.min(windowWidth, windowHeight) / 1.4;
   createCanvas(size, size, WEBGL);
 
   // Create an Audio input
@@ -76,12 +78,16 @@ function setup() {
 
   mic.start();
   spectrumOld = fft.analyze();
+
+  // create a slider
+  slider = createSlider(0, 10000, 7885);
+  slider.position(10, 10);
+  slider.style('width', '80px');
 }
 
 let acc = 0.0;
 
 function draw() {
-  // 'r' is the size of the image in Mandelbrot-space
   let inp = 0.0;
   let spectrum = fft.analyze();
   
@@ -102,6 +108,8 @@ function draw() {
 
   mandel.setUniform('r', acc * Math.PI + 2.5 + sin(millis() / 50000));
   mandel.setUniform('time', (millis() / 1000) % 100);
+  mandel.setUniform('param', slider.value() / 10000);
+
 
   quad(-1, -1, 1, -1, 1, 1, -1, 1);
 }
