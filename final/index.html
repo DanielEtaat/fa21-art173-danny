@@ -30,7 +30,6 @@
             background-size: calc(88vh) calc(90vh);
             background-position: center;
             background-repeat: no-repeat;
-            /* box-shadow: inset black 0px 0px 20px 2px; */
         }
 
         p {
@@ -44,30 +43,76 @@
             text-align: center;
         }
 
+        .button {
+            padding: 18px;
+            border: 1px solid rgb(73, 73, 73);
+            transition: 0.35s background, 0.35s color;
+            background: white;
+            cursor: pointer;
+            font-size: 15px;
+            border-radius: 5px;
+        }
+
+        .pause {
+            font-weight: bold;
+        }
+
+        .toggle {
+            background: white;
+            border: 1px solid rgb(73, 73, 73);
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 7px;
+        }
+
+        .play::after {
+            content: "▶";
+        }
+
+        .pause::after {
+            content: "| |"
+        }
+
+        .button:hover {
+            border: 1px solid rgb(73, 73, 73);
+            background: rgb(73, 73, 73);
+            color: white;
+        }
+
+        .on {
+            border: 1px solid rgb(73, 73, 73);
+            background: rgb(73, 73, 73);
+            color: white;           
+        }
+
+        select {
+            font-size: 15px;
+            padding: 5px;
+        }
+
     </style>
     <title>Fractals</title>
 </head>
 <body>
-    <p>Click to turn on the microphone.</p>
+    <p>Welcome to the Fractal Jukebox.</p>
     <div style="display: grid; grid-template-columns: 25% 50% 25%;">
         <div class="links" style="grid-column: 1;">
-            <p>Play Something</p><br>
-            <div class="links">
-                <a href="https://www.youtube.com/watch?v=E8gmARGvPlI" target="_blank">Last Christmas</a><br><br>
-                <a href="https://www.youtube.com/watch?v=aAkMkVFwAoo" target="_blank">All I Want for Christmas Is You</a><br><br>
-                <a href="https://www.youtube.com/watch?v=gset79KMmt0" target="_blank">Snowman</a><br><br>
-                <a href="https://www.youtube.com/watch?v=QwVjTlTdIDQ" target="_blank">Piano Man</a><br><br>
-                <a href="https://www.youtube.com/watch?v=TZCfydWF48c" target="_blank">Four Seasons "Winter"</a><br><br>
-                <a href="https://www.youtube.com/watch?v=-tJYN-eG1zk" target="_blank">We Will Rock You</a><br><br>
-                <a href="https://www.youtube.com/watch?v=uX6uBHPGfSs" target="_blank">DNA</a><br><br>
-                <a href="https://www.youtube.com/watch?v=fMjasXiIhiQ" target="_blank">Moon</a><br><br>
-                <a href="https://www.youtube.com/watch?v=dO1rMeYnOmM" target="_blank">Time in a Bottle</a><br><br>
-
-            </div>
+            <div style="font-size: 25px;">Play Something</div><br>
+            <select id="songs">
+                <option value="Last Christmas">Last Christmas</option>
+                <option value="All I Want for Christmas Is You">All I Want for Christmas Is You</option>
+                <option value="Snowman">Snowman</option>
+                <option value="Piano Man">Piano Man</option>
+                <option value="Four Seasons, Winter">Four Seasons, Winter</option>
+                <option value="We Will Rock You">We Will Rock You</option>
+                <option value="DNA">DNA</option>
+                <option value="Moon">Moon</option>
+                <option value="Time in a Bottle">Time in a Bottle</option>
+            </select> <button id="playb" class="toggle play" onclick="toggleSong(this);"></button>
         </div>
         <main style="grid-column: 2;"></main>
         <div class="links" style="grid-column: 3;">
-
+            <button id="micb" class="button" onclick="toggleMic(this);">Toggle Microphone</button>
         </div>
     </div>
 </body>
